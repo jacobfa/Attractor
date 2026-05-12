@@ -1,8 +1,8 @@
 import torch
 from typing import Optional
 
-from parcae_lm.models.gpt import GPT, GPTConfig
-from parcae_lm.utils.cache import GPTKVCache
+from attractor.models.gpt import GPT, GPTConfig
+from attractor.utils.cache import GPTKVCache
 
 
 class ModelingGPT(GPT):

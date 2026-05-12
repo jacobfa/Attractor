@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68.2.2", "wheel>=0.41.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parcae-lm"
+version = "0.1.0"
+description = "Parcae: Stable Looped Language Models"
+readme = {file = "README.md", content-type = "text/markdown"}
+license = {file = "LICENSE"}
+requires-python = ">= 3.11"
+authors = [{name = "Hayden Prairie"}]
+keywords = ["language-model", "looping", "recurrent", "transformer", "deep-learning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch",
+    "einops",
+    "sentencepiece>=0.2.0",
+    "tokenizers>=0.15.2",
+    "safetensors>=0.4.3",
+    "transformers>=4.38.0",
+    "packaging",
+    "ninja",
+]
+
+[project.urls]
+Homepage = "https://github.com/SandyResearch/parcae"
+Repository = "https://github.com/SandyResearch/parcae"
+
+[tool.setuptools.packages.find]
+where = [".."]
+include = ["attractor", "attractor.*"]

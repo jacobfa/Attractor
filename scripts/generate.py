@@ -52,7 +52,7 @@ def _build_eval_settings(g: GenerateSettings) -> EvalSettings:
 
 
 def _load_model(s: EvalSettings):
-    from parcae_lm.tokenizer import Tokenizer
+    from attractor.tokenizer import Tokenizer
     if s.checkpoint_path is None and s.hf_path is None and s.hf_repo is None:
         raise SystemExit(
             "No checkpoint found. Pass --out_dir <run_dir>, "

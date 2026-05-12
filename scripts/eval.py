@@ -61,7 +61,7 @@ def _detect_hf_arch(repo_id: str) -> str:
 
 
 def load_model(settings: CLISettings):
-    from parcae_lm.tokenizer import Tokenizer
+    from attractor.tokenizer import Tokenizer
 
     # HuggingFace transformers model (e.g. GPT-2)
     if settings.hf_path is not None:

@@ -12,7 +12,7 @@ from pathlib import Path
 import tiktoken
 import pyarrow.parquet as pq
 
-from parcae_lm.tokenizer import Tokenizer
+from attractor.tokenizer import Tokenizer
 
 # -----------------------------------------------------------------------------
 DATA_DIR = os.environ.get("DATA_DIR", "/resource/data")

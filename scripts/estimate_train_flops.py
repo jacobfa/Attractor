@@ -20,7 +20,7 @@ It accounts for:
                  Counted as `8 · N_total · num_optim_steps` total.
 
 The Parcae and EQLM configs are pinned to the values registered in
-``parcae_lm/configs/{parcae,eqlm}/*-{small,medium,large}.py`` (n_embd,
+``attractor/configs/{parcae,eqlm}/*-{small,medium,large}.py`` (n_embd,
 intermediate_size, layer counts, vocab_size, padded vocab) so the formula
 doesn't drift if a config is edited.
 
@@ -42,7 +42,7 @@ from typing import Dict, Literal, Optional
 
 
 # --------------------------------------------------------------------------- #
-# Pinned arch + token budgets (kept in sync with parcae_lm/configs/* and
+# Pinned arch + token budgets (kept in sync with attractor/configs/* and
 # launch_configs/*).
 # --------------------------------------------------------------------------- #
 

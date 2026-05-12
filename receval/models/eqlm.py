@@ -6,8 +6,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from parcae_lm.models.eqlm import EQLM, EQLMConfig
-from parcae_lm.utils.cache import GPTKVCache
+from attractor.models.eqlm import EQLM, EQLMConfig
+from attractor.utils.cache import GPTKVCache
 
 
 class ModelingEQLM(EQLM):
@@ -30,7 +30,7 @@ class ModelingEQLM(EQLM):
             path = Path(snapshot_download(
                 repo_id=str(pretrained_model_name_or_path),
                 allow_patterns=["*.json", "*.bin", "*.safetensors", "*.pt"]))
-        from parcae_lm.models.config import RoPESettings
+        from attractor.models.config import RoPESettings
         with open(path / "config.json") as f:
             config_dict = json.load(f)
         if "rope_settings" in config_dict and isinstance(config_dict["rope_settings"], dict):

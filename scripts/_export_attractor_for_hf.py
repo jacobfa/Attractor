@@ -1,6 +1,6 @@
 """Extract just the model weights from a parcae training-state checkpoint and
 save in HF-compatible format (config.json + model.pt) using
-``parcae_lm.save_pretrained``.
+``attractor.save_pretrained``.
 """
 import argparse
 import json
@@ -10,8 +10,8 @@ from pathlib import Path
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-import parcae_lm
-from parcae_lm.models.attractor.config import AttractorConfig
+import attractor
+from attractor.models.attractor.config import AttractorConfig
 
 
 def _strip_prefixes(sd):
@@ -64,7 +64,7 @@ def main():
     if unexpected:
         print(f"[warn] unexpected keys: {len(unexpected)}  (first 3: {unexpected[:3]})")
 
-    parcae_lm.save_pretrained(model, str(out_dir))
+    attractor.save_pretrained(model, str(out_dir))
     written = sorted(p.name for p in out_dir.iterdir())
     print(f"[done] {out_dir}: {written}")
     for p in out_dir.iterdir():

@@ -2,7 +2,7 @@ import torch
 
 from typing import Optional, List
 from torch.utils.data._utils.collate import collate_tensor_fn
-from parcae_lm.tokenizer import Tokenizer
+from attractor.tokenizer import Tokenizer
 
 
 class BestFitPackingCollator:

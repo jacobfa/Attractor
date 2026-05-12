@@ -65,8 +65,8 @@ quant = [
 
 [tool.setuptools.packages.find]
 include = [
-    "parcae_lm",
-    "parcae_lm.*",
+    "attractor",
+    "attractor.*",
     "recpre",
     "recpre.*",
     "receval",
@@ -75,7 +75,7 @@ include = [
 exclude = []
 
 [tool.setuptools.package-data]
-parcae_lm = [
+attractor = [
     "LICENSE",
     "README.md",
 ]
@@ -140,7 +140,7 @@ ignore = [
 ]
 
 [tool.pyright]
-include = ["parcae_lm", "recpre", "receval"]
+include = ["attractor", "recpre", "receval"]
 exclude = ["**/__pycache__", "**/*ipynb*"]
 
 pythonVersion = "3.11"

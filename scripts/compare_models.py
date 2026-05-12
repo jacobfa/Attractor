@@ -1,7 +1,7 @@
 """Side-by-side FLOPs + latency comparison: Parcae-140M HF vs our EQLM run.
 
 Loads:
-  * parcae_lm.from_pretrained("SandyResearch/parcae-140m")  -- pretrained Parcae-140M
+  * attractor.from_pretrained("SandyResearch/parcae-140m")  -- pretrained Parcae-140M
   * /scratch1/feinashl/eqlm/eqlm-small-140m  -- our EQLM run dir
 
 Reports for each model:
@@ -31,7 +31,7 @@ torch._dynamo.config.suppress_errors = True
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import parcae_lm
+import attractor
 from receval.settings import CLISettings
 from receval.models.eqlm import ModelingEQLM
 from scripts.cost import estimate_flops_recurrent, estimate_flops_gpt
@@ -53,7 +53,7 @@ def _strip_prefixes(sd):
 
 def load_parcae_hf(repo_id: str, device: str, dtype: torch.dtype):
     # Use ModelingParcae so we get generate / forward_for_generation /
-    # create_cache. The bare Parcae class returned by parcae_lm.from_pretrained
+    # create_cache. The bare Parcae class returned by attractor.from_pretrained
     # is the training shell and has no generate method.
     from receval.models.parcae import ModelingParcae
     print(f"[parcae] Loading {repo_id} ...")

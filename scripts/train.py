@@ -5,8 +5,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from parcae_lm.models.parcae.config import ParcaeConfig
-from parcae_lm.tokenizer import Tokenizer
+from attractor.models.parcae.config import ParcaeConfig
+from attractor.tokenizer import Tokenizer
 
 global_start_time = time.time()
 import math

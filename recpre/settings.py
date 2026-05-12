@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from contextlib import nullcontext
 from typing import Union, Optional, Any, Literal
 
-from parcae_lm.models.config import AnyConfig, Config as DynamicConfig
+from attractor.models.config import AnyConfig, Config as DynamicConfig
 
 from transformers import AutoModelForCausalLM, AutoConfig
 

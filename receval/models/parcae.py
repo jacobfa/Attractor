@@ -2,7 +2,7 @@ import json
 import torch
 from pathlib import Path
 from typing import Optional, Union
-from parcae_lm.models.parcae import Parcae, ParcaeConfig
+from attractor.models.parcae import Parcae, ParcaeConfig
 
 class ModelingParcae(Parcae):
     def __init__(self, config: ParcaeConfig, objective=None, gradient_checkpointing=False) -> None:
@@ -17,7 +17,7 @@ class ModelingParcae(Parcae):
         if not path.exists():
             from huggingface_hub import snapshot_download
             path = Path(snapshot_download(repo_id=str(pretrained_model_name_or_path), allow_patterns=["*.json", "*.bin", "*.safetensors"]))
-        from parcae_lm.models.config import RoPESettings
+        from attractor.models.config import RoPESettings
         with open(path / "config.json") as f:
             config_dict = json.load(f)
         if "rope_settings" in config_dict and isinstance(config_dict["rope_settings"], dict):
@@ -78,7 +78,7 @@ class ModelingParcae(Parcae):
         self._generation_config = value
 
     def create_cache(self, lookup_strategy: str = "full", num_steps: Optional[int] = None):
-        from parcae_lm.utils.cache import ParcaeDynamicCache
+        from attractor.utils.cache import ParcaeDynamicCache
         if num_steps is None:
             num_steps = self.config.mean_recurrence
         n_prelude = len(self.transformer.prelude)

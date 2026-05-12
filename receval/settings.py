@@ -123,7 +123,7 @@ class CLISettings:
         self.tokenizer_path = cfg.get("tokenizer_path")
         model_overwrite = cfg.get("model_overwrite", {})
         if self.model_name:
-            from parcae_lm.models.config import Config as DynamicConfig
+            from attractor.models.config import Config as DynamicConfig
             self.model_config = DynamicConfig.from_name(self.model_name, **model_overwrite)
             self.sequence_length = self.model_config.block_size
             arch = getattr(self.model_config, 'model_class_name', 'GPT')
