@@ -6,27 +6,15 @@
 
 University of Southern California
 
-[![Project Page](https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&logo=github)](https://attractor-models.github.io)
-[![Paper](https://img.shields.io/badge/Paper-Coming%20Soon-lightgrey?style=for-the-badge&logo=arxiv)](https://attractor-models.github.io)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+<a href="https://attractor-models.github.io" target="_blank"><img src="https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&logo=github" alt="Project Page"></a>
+<a href="https://attractor-models.github.io" target="_blank"><img src="https://img.shields.io/badge/Paper-Coming%20Soon-lightgrey?style=for-the-badge&logo=arxiv" alt="Paper"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
 
-[![Attractor-140M](https://img.shields.io/badge/%F0%9F%A4%97-Attractor--140M-yellow?style=flat-square)](https://huggingface.co/jacobfa1/attractor-140m)
-[![Attractor-370M](https://img.shields.io/badge/%F0%9F%A4%97-Attractor--370M-yellow?style=flat-square)](https://huggingface.co/jacobfa1/attractor-370m)
-[![Attractor-770M](https://img.shields.io/badge/%F0%9F%A4%97-Attractor--770M-yellow?style=flat-square)](https://huggingface.co/jacobfa1/attractor-770m)
+<a href="https://huggingface.co/jacobfa1/attractor-140m" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97-Attractor--140M-yellow?style=flat-square" alt="Attractor-140M"></a>
+<a href="https://huggingface.co/jacobfa1/attractor-370m" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97-Attractor--370M-yellow?style=flat-square" alt="Attractor-370M"></a>
+<a href="https://huggingface.co/jacobfa1/attractor-770m" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%A4%97-Attractor--770M-yellow?style=flat-square" alt="Attractor-770M"></a>
 
 </div>
-
----
-
-Attractor Models augment a standard Transformer backbone with a weight-tied fixed-point refinement head. The backbone proposes an initial output embedding; a smaller recurrent block then iterates it to a fixed point via Anderson acceleration, with the backbone context injected at every step. Gradients flow through the implicit function theorem, keeping **training memory constant** regardless of solver iterations.
-
-### Key Results
-
-| | |
-|---|---|
-| **46.6%** perplexity improvement over Transformers | **91.4%** Sudoku-Extreme accuracy (27M params) |
-| **770M** Attractor &gt; **1.3B** Transformer (2&times; tokens) | **93.1%** Maze-Hard accuracy (27M params) |
-| **25&ndash;31%** less training FLOPs vs. looped baselines | Frontier models (Claude, GPT o3, R1) score **0%** |
 
 ## Installation
 
