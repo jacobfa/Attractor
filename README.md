@@ -7,7 +7,7 @@
 University of Southern California
 
 [![Project Page](https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&logo=github)](https://attractor-models.github.io)
-[![Paper](https://img.shields.io/badge/Paper-Coming%20Soon-lightgrey?style=for-the-badge&logo=arxiv)](https://attractor-models.github.io)
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b?style=for-the-badge&logo=arxiv)](https://arxiv.org/abs/2605.12466)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 [![Attractor-140M](https://img.shields.io/badge/%F0%9F%A4%97-Attractor--140M-yellow?style=flat-square)](https://huggingface.co/jacobfa1/attractor-140m)
@@ -108,7 +108,7 @@ scripts/              # Training, eval, generation entry points
   title={Solve the Loop: Attractor Models for Language and Reasoning},
   author={Fein-Ashley, Jacob and Rashidinejad, Paria},
   year={2026},
-  url={https://attractor-models.github.io}
+  url={https://arxiv.org/abs/2605.12466}
 }
 ```
 
