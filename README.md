@@ -12,15 +12,13 @@ University of Southern California
 
 <br>
 
-<a href="https://arxiv.org/abs/2605.12466"><img src="assets/badge-paper.svg" height="34" alt="arXiv Paper"></a>&nbsp;
-<a href="https://attractor-models.github.io"><img src="assets/badge-project.svg" height="34" alt="Project Page"></a>&nbsp;
-<a href="LICENSE"><img src="assets/badge-license.svg" height="34" alt="MIT License"></a>
+[![arXiv](https://img.shields.io/badge/arXiv-2605.12466-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2605.12466)
+[![Project Page](https://img.shields.io/badge/Project-Page-1D4ED8?style=for-the-badge&logo=github&logoColor=white)](https://attractor-models.github.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](LICENSE)
 
-<br><br>
-
-<a href="https://huggingface.co/jacobfa1/attractor-140m"><img src="assets/badge-hf-140m.svg" height="34" alt="Attractor-140M"></a>&nbsp;
-<a href="https://huggingface.co/jacobfa1/attractor-370m"><img src="assets/badge-hf-370m.svg" height="34" alt="Attractor-370M"></a>&nbsp;
-<a href="https://huggingface.co/jacobfa1/attractor-770m"><img src="assets/badge-hf-770m.svg" height="34" alt="Attractor-770M"></a>
+[![Attractor-140M on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Attractor--140M-FFD21E?style=for-the-badge)](https://huggingface.co/jacobfa1/attractor-140m)
+[![Attractor-370M on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Attractor--370M-FFD21E?style=for-the-badge)](https://huggingface.co/jacobfa1/attractor-370m)
+[![Attractor-770M on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Attractor--770M-FFD21E?style=for-the-badge)](https://huggingface.co/jacobfa1/attractor-770m)
 
 <br>
 
