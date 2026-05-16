@@ -1,20 +1,32 @@
 <div align="center">
 
-# Solve the Loop: Attractor Models for Language and Reasoning
+# Solve the Loop
 
-**Jacob Fein-Ashley &nbsp;&middot;&nbsp; Paria Rashidinejad**
+### Attractor Models for Language and Reasoning
+
+<br>
+
+[Jacob Fein-Ashley](https://jacobfa.com) &nbsp;&middot;&nbsp; [Paria Rashidinejad](https://paria-r.github.io)
 
 University of Southern California
 
-[![Project Page](https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&logo=github)](https://attractor-models.github.io)
-[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b?style=for-the-badge&logo=arxiv)](https://arxiv.org/abs/2605.12466)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+<br>
 
-[![Attractor-140M](https://img.shields.io/badge/%F0%9F%A4%97-Attractor--140M-yellow?style=flat-square)](https://huggingface.co/jacobfa1/attractor-140m)
-[![Attractor-370M](https://img.shields.io/badge/%F0%9F%A4%97-Attractor--370M-yellow?style=flat-square)](https://huggingface.co/jacobfa1/attractor-370m)
-[![Attractor-770M](https://img.shields.io/badge/%F0%9F%A4%97-Attractor--770M-yellow?style=flat-square)](https://huggingface.co/jacobfa1/attractor-770m)
+<a href="https://arxiv.org/abs/2605.12466"><img src="assets/badge-paper.svg" height="34" alt="arXiv Paper"></a>&nbsp;
+<a href="https://attractor-models.github.io"><img src="assets/badge-project.svg" height="34" alt="Project Page"></a>&nbsp;
+<a href="LICENSE"><img src="assets/badge-license.svg" height="34" alt="MIT License"></a>
+
+<br><br>
+
+<a href="https://huggingface.co/jacobfa1/attractor-140m"><img src="assets/badge-hf-140m.svg" height="34" alt="Attractor-140M"></a>&nbsp;
+<a href="https://huggingface.co/jacobfa1/attractor-370m"><img src="assets/badge-hf-370m.svg" height="34" alt="Attractor-370M"></a>&nbsp;
+<a href="https://huggingface.co/jacobfa1/attractor-770m"><img src="assets/badge-hf-770m.svg" height="34" alt="Attractor-770M"></a>
+
+<br>
 
 </div>
+
+> **Attractor models** are looped language models that replace the recurrent block with a fixed-point iteration head.
 
 ## Installation
 
@@ -27,11 +39,21 @@ pip install -e .
 ## Quick Start
 
 ```python
+import attractor
+
+model = attractor.create_model("attractor-small-140m")
+```
+
+Or, more explicitly:
+
+```python
 from attractor.models.attractor import Attractor, AttractorConfig
 
 config = AttractorConfig.from_name("attractor-small-140m")
 model = config.construct_model()
 ```
+
+Other valid names include `parcae-*`, `gpt-*`, `eqlm-*`, and the `*-sudoku-{7m,27m}` reasoning configs (see [Project Structure](#project-structure)).
 
 ## Pretrained Models
 
@@ -52,17 +74,29 @@ Training is configured via YAML files in `launch_configs/`.
 | `attractor-small-140m.yaml` | Attractor | 140M |
 | `attractor-medium-370m.yaml` | Attractor | 370M |
 | `attractor-large-770m.yaml` | Attractor | 770M |
-| `attractor-xlarge-1_3b.yaml` | Attractor | 1.3B |
 | `parcae-small-140m.yaml` | Parcae (baseline) | 140M |
 | `parcae-medium-370m.yaml` | Parcae (baseline) | 370M |
+| `parcae-large-770m.yaml` | Parcae (baseline) | 770M |
+| `parcae-xlarge-1_3b.yaml` | Parcae (baseline) | 1.3B |
 | `gpt-small-140m.yaml` | GPT (baseline) | 140M |
 | `gpt-medium-370m.yaml` | GPT (baseline) | 370M |
+| `gpt-large-770m.yaml` | GPT (baseline) | 770M |
+| `gpt-xlarge-1_3b.yaml` | GPT (baseline) | 1.3B |
 
-Launch with:
+`runs/run_training.sh` takes positional arguments `CONFIG RUN_NAME RUN_GROUP NUM_GPUS` (defaults: `parcae-small-140m`, group `parcae`, 8 GPUs). For example, to train Attractor-140M on 2 GPUs:
 
 ```bash
-bash runs/run_training.sh launch_configs/attractor-small-140m.yaml attractor-small 2
+bash runs/run_training.sh \
+    launch_configs/attractor-small-140m.yaml \
+    attractor-small-140m attractor 2
 ```
+
+Tiny reasoning models:
+
+| Config | Architecture | Parameters |
+|--------|-------------|------------|
+| `attractor-sudoku-7m` | Attractor (TRM-DEQ) | 7M |
+| `attractor-sudoku-27m` | Attractor (TRM-DEQ) | 27M |
 
 ### Sudoku & Maze Reasoning
 
@@ -70,8 +104,13 @@ bash runs/run_training.sh launch_configs/attractor-small-140m.yaml attractor-sma
 torchrun --standalone --nproc_per_node=2 \
     -m experiments.attractor_puzzles.trm.train_trm_deq \
     --data_dir /path/to/sudoku-data \
-    --out_dir /path/to/output
+    --out_dir  /path/to/output \
+    --L_layers 8 \
+    --deq_max_iter 8 --deq_min_iter 4 --deq_tol 1e-3 \
+    --bptt_through 2 --jacobian_reg_lambda 1e-3
 ```
+
+The sibling pipeline under `experiments/eqlm_sudoku/trm/train_trm_deq.py` runs the same trainer against the EQLM head; both share `experiments/*/data/` and `experiments/*/configs/`.
 
 ### ARC-AGI Puzzles
 
@@ -79,11 +118,25 @@ torchrun --standalone --nproc_per_node=2 \
 bash experiments/attractor_puzzles/launch_arc_deq.sh
 ```
 
+This launches `experiments/eqlm_sudoku/trm/train_trm_deq.py` on 3 GPUs under SLURM with the ARC-AGI dataset.
+
 ## Evaluation
 
+Eval is configured via YAML files in `eval_configs/` (`eval-core.yaml`, `eval-core-extended.yaml`, `eval-attractor.yaml`, `eval-eqlm.yaml`, `eval-val-loss.yaml`, `eval-lambada.yaml`). Launch with the wrapper:
+
 ```bash
-python scripts/eval.py --out_dir /path/to/checkpoint --eval_tasks core
+bash runs/run_eval.sh /path/to/out_dir eval_configs/eval-core.yaml 8
 ```
+
+or directly:
+
+```bash
+torchrun --nproc_per_node=8 scripts/eval.py \
+    --out_dir /path/to/out_dir \
+    --config  eval_configs/eval-core.yaml
+```
+
+Supported `eval_tasks` values: `lm_eval`, `sample`, `bpb`, `core`, `core_extended`.
 
 ## Project Structure
 
@@ -91,14 +144,24 @@ python scripts/eval.py --out_dir /path/to/checkpoint --eval_tasks core
 attractor/
   models/
     attractor/    # Attractor model (fixed-point head + IFT backward)
+    eqlm/         # EQLM (alias of Attractor; used for scaling-law runs)
     parcae/       # Parcae looped model (baseline)
     gpt/          # Standard transformer (baseline)
-  configs/        # Model configs (140M – 1.3B)
+  configs/        # Model configs:
+    attractor/    #   attractor-{small-140m, medium-370m, large-770m, xlarge-1_3b,
+                  #              sudoku-7m, sudoku-27m}
+    parcae/       #   parcae-{small-140m, medium-370m, large-770m, xlarge-1_3b}
+    gpt/          #   gpt-{small-140m, medium-370m, large-770m, xlarge-1_3b}
 experiments/
   attractor_puzzles/   # Sudoku, Maze, ARC-AGI with TRM-DEQ
-recpre/               # Training infrastructure
-receval/              # Evaluation infrastructure
-scripts/              # Training, eval, generation entry points
+  eqlm_sudoku/         # Sibling pipeline used by the ARC launcher
+launch_configs/        # YAML training configs (parcae / attractor / eqlm / gpt × 4 sizes)
+eval_configs/          # YAML evaluation configs (core / core_extended / val-loss / lambada)
+recpre/                # Training infrastructure
+receval/               # Evaluation infrastructure
+runs/                  # Shell wrappers: run_training.sh, run_eval.sh,
+                       #                 sweep_recurrence.sh, run_batch_eval.sh
+scripts/               # Training, eval, generation, FLOPs estimation entry points
 ```
 
 ## Citation
