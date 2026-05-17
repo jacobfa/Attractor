@@ -10,8 +10,6 @@ __pycache__/
 outputs/
 logs/
 wandb/
-data/
-models/
 results/
 tmp/
 .env
