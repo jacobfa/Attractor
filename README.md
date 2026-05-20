@@ -6,7 +6,7 @@
 
 <br>
 
-[Jacob Fein-Ashley](https://jacobfa.com) &nbsp;&middot;&nbsp; [Paria Rashidinejad](https://paria-r.github.io)
+[Jacob Fein-Ashley](jacobfa.github.io) &nbsp;&middot;&nbsp; [Paria Rashidinejad](https://pariard.github.io/)
 
 University of Southern California
 
